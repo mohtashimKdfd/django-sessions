@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user</title>
+</head>
+<body>
+
+{% if name != 'User not Logged in!'%}
+    hello {{ name }}
+    <br>
+{% else %}
+    <h1>User not Logged in!</h1>
+    <a href="{% url 'login' %}">Login</a>
+    <br>
+{% endif %}
+
+<a href="{% url 'logout' %}">logOut</a>
+
+</body>
+</html>
