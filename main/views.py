@@ -1,5 +1,5 @@
-from django.shortcuts import render , HttpResponse, resolve_url
-from .models import Users
+from django.shortcuts import render , HttpResponse
+from .models import Users , Book
 # Create your views here.
 
 #Important Notes
@@ -56,24 +56,27 @@ def addnewUser(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        book_name = request.POST.get('book')
         if Users.objects.filter(username=username).exists():
             return render(request,'main/login.html',{'status':'user already exsists| Try login '})
         
         else:
             new_user = Users(username=username,password=password)
             new_user.save()
+            new_book = Book(name=book_name,author=new_user)
+            new_book.save()
             return render(request,'main/signup.html',{'status':'New user created'})
-    return render(request,'main/signup.html',{'status':'Sign Up Page'})
+    return render(request,'main/signup.html',{'status':'Sign Up Page'} )
 
 def login(request):
     if 'name' in request.session:
-                return render(request,'main/userpage.html',{'name':request.session.get('name')})
+            return render(request,'main/userpage.html',{'name':request.session.get('name')})
     return render(request,'main/login.html')
 
 def user(request):
     name = request.session.get('name','Guest')
     if name == 'Guest':
-        return render(request,'main/userpage.html',{'name':'User not Logged in!'})
+        return render(request,'main/login.html',{'name':'User not Logged in!'})
     else:
         return render(request,'main/userpage.html',{'name':name})
 

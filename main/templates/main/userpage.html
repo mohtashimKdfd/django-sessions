@@ -9,15 +9,14 @@
 <body>
 
 {% if name != 'User not Logged in!'%}
-    hello {{ name }}
+    <h1>hello {{ name }}</h1>
     <br>
 {% else %}
     <h1>User not Logged in!</h1>
-    <a href="{% url 'login' %}">Login</a>
+    <h1><a href="{% url 'login' %}">Login</a></h1>
     <br>
 {% endif %}
 
-<a href="{% url 'logout' %}">logOut</a>
-
+<h1><a href="{% url 'logout' %}">logOut</a></h1>
 </body>
 </html>
